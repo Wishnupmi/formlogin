@@ -1,0 +1,42 @@
+<template>
+<div class="page" data-name="about">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">About</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">About My App</div>
+    
+
+    <div class="block block-strong">
+      <p>Button Logout.</p>
+      
+      <p><a href="#" class="button button-fill color-green" @click="${showNotificationFull}">Logout With Preloader</a></p>
+      <!-- <p><a href="#" class="button button-fill color-blue" @click="showDeterminate(false)">Logout With Progressbar</a></p> -->
+    </div>
+
+  </div>
+</div>
+</template>
+<script>
+export default (props, { $f7, $update}) => {
+  const showNotificationFull = () => {
+    $f7.dialog.preloader('Tunggu sebentar...');
+          setTimeout(function () {
+            $f7.dialog.close();
+            $f7.views.main.router.navigate('/login/');
+            localStorage.removeItem("status");
+            localstorage.clear();
+          }, 1000);   
+  }
+  return $render;
+};
+</script>

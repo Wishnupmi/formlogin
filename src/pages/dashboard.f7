@@ -1,0 +1,146 @@
+<template>
+<div class="page" data-name="about">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">Dashboard</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Dashboard My App</div>
+    
+
+    <div class="block block-strong">
+      <p>Button Logout.</p>
+      
+      <p>
+        <a href="#" class="button button-raised" @click=${()=> showInfinite(false)}>Logout Loading 1</a>
+      </p>
+    </div>
+    <div class="block block-strong">
+      <p>Overlay with infinite multi-color progress bar on top of the app</p>
+      <p>
+        <a href="#" class="button button-raised" @click=${()=> showInfinite(true)}>Logout Loading 2</a>
+      </p>
+    </div>
+    <div class="block block-strong">
+        <p><a href="#" class="button button-fill color-green" @click=${showNotificationFull}>Logout With Preloader</a></p>
+    </div>   
+</div>
+</div>
+</template>
+<script>
+    export default (props, { $, $f7, $on }) => {
+    let determinateLoading = false;
+    let infiniteLoading = false;
+
+    const showNotificationFull = () => {
+    $f7.dialog.preloader('Tunggu sebentar...');
+    setTimeout(function () {
+        $f7.dialog.close();
+        $f7.views.main.router.navigate('/login/');
+            localStorage.removeItem("status");
+            localstorage.clear();
+          }, 1000);   
+  }
+
+    // Set progress on inline progressbar
+    const setInlineProgress = (value) => {
+      $f7.progressbar.set('#demo-inline-progressbar', value);
+    }
+
+    // Function show determinate progressbar and emulate loading
+    const showDeterminate = (inline) => {
+      if (determinateLoading) return;
+      determinateLoading = true;
+      var progressBarEl;
+      if (inline) {
+        progressBarEl = $f7.progressbar.show('#demo-determinate-container', 0);
+        
+      } else {
+        progressBarEl = $f7.progressbar.show(0);
+      }
+      var progress = 0;
+      function simulateLoading() {
+        setTimeout(function () {
+          var progressBefore = progress;
+          progress += Math.random() * 20;
+          $f7.progressbar.set(progressBarEl, progress);
+          if (progressBefore < 100) {
+            simulateLoading(); //keep "loading"
+          }
+          else {
+            determinateLoading = false;
+            $f7.progressbar.hide(progressBarEl); //hide
+          }
+        }, Math.random() * 200 + 200);
+      }
+      simulateLoading();
+    }
+
+    // show inline infinite progressbar
+    const showInfinite = (multiColor) => {
+      if (infiniteLoading) return;
+      infiniteLoading = true;
+      if (multiColor) {
+        $f7.progressbar.show('multi');
+        setTimeout(function () { 
+            $f7.views.main.router.navigate('/login/');
+            localStorage.removeItem("status");
+            localstorage.clear();
+          }, 3000);   
+      } else {
+        $f7.progressbar.show();
+        setTimeout(function () { 
+            $f7.views.main.router.navigate('/login/');
+            localStorage.removeItem("status");
+            localstorage.clear();
+        }, 3000); 
+      }
+      setTimeout(function () {
+        infiniteLoading = false;
+        $f7.progressbar.hide();
+      }, 3000);
+    }
+    
+    
+    return $render;
+  }
+
+
+
+// // export default (props, { $f7, $update}) => {
+// //   const showNotificationFull = () => {
+// //     $f7.dialog.preloader('Tunggu sebentar...');
+// //           setTimeout(function () {
+// //             $f7.dialog.close();
+// //             $f7.views.main.router.navigate('/login/');
+// //             localStorage.removeItem("status");
+// //             localstorage.clear();
+// //           }, 1000);   
+// //   }
+// //   // show inline infinite progressbar
+// //   const showInfinite = (multiColor) => {
+// //       if (infiniteLoading) return;
+// //       infiniteLoading = true;
+// //       if (multiColor) {
+// //         $f7.progressbar.show('multi');
+// //       } else {
+// //         $f7.progressbar.show();
+// //       }
+// //       setTimeout(function () {
+// //         infiniteLoading = false;
+// //         $f7.progressbar.hide();
+// //       }, 3000);
+// //     }
+
+
+// //   return $render;
+// };
+</script>

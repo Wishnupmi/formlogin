@@ -1,0 +1,131 @@
+<template>
+    <div class="page" data-name="home">
+      <div class="page-content">
+        <!-- Default view-page layout -->
+        <div class="view">
+          <div class="page login-screen-page">
+            <!-- page-content has additional login-screen content -->
+            <div class="page-content login-screen-content">
+              <div class="login-screen-title">My App</div>
+              <!-- Login form -->
+              <form>
+                <div class="list">
+                  <ul>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Username</div>
+                        <div class="item-input-wrap">
+                          <input type="text" name="username" placeholder="Username" value="${username}" @input="${updateUsername}"/>
+                          <span class="input-clear-button"></span>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content item-input">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Password</div>
+                        <div class="item-input-wrap">
+                          <input type="password" name="password" placeholder="Password"  value="${password}" @input="${updatePassword}"/>
+                          <span class="input-clear-button"></span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list">
+                  <ul>
+                    <li>
+                      <a href="#" class="item-list list-button login-button" @click="${alertLoginData}">Sign In</a>
+                    </li>
+                  </ul>
+                  <div class="block-footer">Some text with login information.</div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+      </div>  
+    </div>
+  </template>
+  <script>
+  // export default () => {
+  //   return $render;
+  // }
+  </script>
+  <script>
+  export default (props, { $f7, $update}) => {
+    let username = '';
+    let password = '';
+  
+    const updateUsername = (e) => {
+      username = e.target.value;
+      $update();
+    }
+  
+    const updatePassword = (e) => {
+      password = e.target.value;
+      $update();
+    }
+  
+    const alertLoginData = () => {
+        $f7.request({
+    // url: "http://localhost/baru/login.php",
+    url: "http://localhost/auth_login/login.php",
+    type: "POST",
+    data: {
+      "username": username,
+      "password": password,
+    },
+    dataType: 'json',
+    success:function(data){
+        console.log(data.error);
+        if(data.error){
+            $f7.dialog.alert(data.pesan,"Konfirmasi");
+
+      } else {
+        $f7.dialog.preloader();
+        $f7.views.main.router.navigate('/dashboard/');
+
+  setTimeout(function () {
+    $f7.dialog.close();
+    localStorage.setItem("status","login");
+    $f7.views.main.router.navigate('/dashboard/');
+
+  }, 1000);
+      }
+
+
+
+
+    //   $f7.request.post('http://localhost/auth_login/login.php', {'username':username, 'password':password })
+    //      .then(function(res) {
+    //      // console.log('Load was performed');
+    //      console.log(JSON.stringify(res.error));
+        // $f7.dialog.alert(res.data,"Konfirmasi");
+        //   if(res.error){
+            // $f7.dialog.alert(res.pesan,"Konfirmasi");
+  
+        //   } else {
+        //     $f7.dialog.preloader();
+        //     // localStorage.removeItem("status");
+        //     //   localstorage.clear();
+        //     // var status = localStorage.getItem("status");
+        //     // alert(status);
+        //     $f7.views.main.router.navigate('/about/');
+        //     setTimeout(function () {
+        //         $f7.dialog.close();
+        //         localStorage.setItem("status","login");
+        //         $f7.views.main.router.navigate('/about/');
+        //     }, 1000);
+          }
+           
+      });
+  
+    }
+  
+    
+  
+    return $render;
+  }
+  </script>
+  
