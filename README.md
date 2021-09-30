@@ -142,3 +142,5 @@ Love Framework7? Support project by donating or pledging on:
 
 ## Link Demo App Mobile
 - Link Url : https://giflab.my.id/formlogin/
+- Username : wishnupmi@gmail.com
+- Password : 123
