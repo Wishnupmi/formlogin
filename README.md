@@ -143,7 +143,7 @@ Love Framework7? Support project by donating or pledging on:
 - OpenCollective: https://opencollective.com/framework7
 
 ## Fitur
-* Form Login
+* Form Login and Logout
 * Input and Upload Image
 
 ## Link Demo App Mobile
