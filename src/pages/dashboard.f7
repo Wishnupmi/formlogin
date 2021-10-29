@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="page-content">
-    <div class="block-title">Dashboard My App</div>
+    <!-- <div class="block-title">Dashboard My App</div> -->
     
 
 
@@ -77,9 +77,9 @@
         </div>
 
         <!-- <img id="image" src="" style="display:none;width:100%;"> -->
-<img src="" id="out" />
-        <div class="block block-strong">
-          <p><a href="#" id="buttonid" class="button button-fill color-green" @click=${selectimage}>Select Image</a></p>
+<!-- <img src="" id="out" /> -->
+        <div class="block block-strong" style="margin-top:-30px;">
+          <p><a href="#" id="buttonid" class="button button-fill color-green" @click=${selectimage}>Upload</a></p>
       </div> 
 
         <div class="block block-strong">
