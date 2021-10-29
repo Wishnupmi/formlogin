@@ -1,6 +1,6 @@
 # My App
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://github.com/Wishnupmi/formlogin/upload_image.png)
 
 ## Framework7 CLI Options
 
