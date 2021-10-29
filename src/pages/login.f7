@@ -70,7 +70,7 @@
     const alertLoginData = () => {
         $f7.request({
     // url: "http://localhost/baru/login.php",
-    url: "http://localhost/auth_login/login.php",
+    url: "https://giflab.my.id/formlogin/login.php",
     type: "POST",
     data: {
       "username": username,

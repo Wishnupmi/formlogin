@@ -31,6 +31,8 @@ var app = new Framework7({
   
 });
 
+
+
 // cek();
 
 // function cek(){

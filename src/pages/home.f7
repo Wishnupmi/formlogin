@@ -70,7 +70,7 @@ export default (props, { $f7, $update}) => {
   const alertLoginData = () => {
     $f7.request({
     // url: "http://localhost/baru/login.php",
-    url: "http://localhost/auth_login/login.php",
+    url: "http://formlogin/formlogin/login.php",
     type: "POST",
     data: {
       "username": username,

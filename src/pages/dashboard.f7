@@ -16,6 +16,91 @@
     <div class="block-title">Dashboard My App</div>
     
 
+
+
+
+    <div class="block-title">Form Example</div>
+    <div class="list no-hairlines-md">
+      <form class="list" id="my-form" action="javascript:void(0)" enctype="multipart/form-data">
+      <ul>
+
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-title item-label">Name</div>
+              <div class="item-input-wrap">
+                <input type="text" name="nama" placeholder="Your name" value="${nama}" @input="${updateNama}"/>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-title item-label">Birth date</div>
+              <div class="item-input-wrap">
+                <input type="date" name="tanggal" placeholder="Birth day" value="${tanggal}" @input="${updateTanggal}"/>
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+        <li class="align-top">
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-title item-label">Textarea</div>
+              <div class="item-input-wrap">
+                <textarea placeholder="Bio" name="description" value="${description}" @input="${updateDescription}"></textarea>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="align-top">
+          <div class="item-content item-input">
+            <div class="item-inner">
+              <div class="item-title item-label">Select Image</div>
+              <div class="item-input-wrap">
+                <input type="file" id="input" name="picture" value="${picture}" @input="${updatePicture}"/>
+                <!-- <textarea placeholder="Bio" name="description" value="${description}" @input="${updateDescription}"></textarea> -->
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+
+        </ul>
+      </form>
+        </div>
+
+        <!-- <img id="image" src="" style="display:none;width:100%;"> -->
+<img src="" id="out" />
+        <div class="block block-strong">
+          <p><a href="#" id="buttonid" class="button button-fill color-green" @click=${selectimage}>Select Image</a></p>
+      </div> 
+
+        <div class="block block-strong">
+          <p><a href="#" class="button button-fill color-green" @click=${save}>Save</a></p>
+      </div>   
+
+
+
+
+      <!-- <img src="" id="out2" />
+      <button onClick="onClickHandler(event)">select an IMAGE</button> -->
+
+
+
+
+
+
+
+
+
+
     <div class="block block-strong">
       <p>Button Logout.</p>
       
@@ -36,9 +121,129 @@
 </div>
 </template>
 <script>
-    export default (props, { $, $f7, $on }) => {
+
+
+
+
+    export default (props, { $, $f7, $update, $on }) => {
     let determinateLoading = false;
     let infiniteLoading = false;
+
+    
+
+    let nama = '';
+    let tanggal = '';
+    let description = '';
+    let picture = '';
+
+    const updateNama = (e) => {
+      nama = e.target.value;
+      $update();
+    }
+
+    const updateTanggal = (e) => {
+      tanggal = e.target.value;
+      $update();
+    }
+
+    const updateDescription = (e) => {
+      description = e.target.value;
+      $update();
+    }
+
+    const updatePicture = (e) => {
+      picture = e.target.value;
+      $update();
+    }
+    
+    function clear() {
+        nama = '';
+        tanggal = '';
+        description = '';
+        picture = '';
+    }
+    const save = (e) => {
+      // alert(nama);
+
+      $f7.request.post("http://localhost/formlogin/aksi.php", {nama:nama, tanggal:tanggal, description:description}, function (data) {
+     //And the response from api will come like this
+     var data = JSON.parse(data); 
+          if(data.status){
+            $f7.dialog.alert("Success");
+            clear();
+            $update();
+          }else{
+            $f7.dialog.alert("Failed");
+          }
+      });
+
+
+    }
+
+    
+
+    const selectimage = (e) => {
+      // alert(nama);
+// var filePath=$('#fileUpload').val();
+// alert('select');
+// var formDdata=document.getElementById('input').files[0];
+// let FData = new FormData();
+// let img = $("#input")[0].files;
+// console.log(img[0]);
+// FData.append('input',img[0]);
+// FData.append('input', img[0]);
+// console.log(img[0].name);
+  // FData.append("file",JSON.stringify(picture));    
+// alert(JSON.stringify(picture));
+// document.getElementById('out').src = "file://"+picture;
+
+// var galleryImage = document.getElementById('my-form');
+//     galleryImage.style.display = 'block';
+//     galleryImage.src = imageURI;
+    // document.getElementById('out').src = JSON.stringify(picture);
+    // alert(JSON.stringify(galleryImage));
+
+    var f=document.getElementById('input').files[0];
+	var FData = new FormData();
+	FData.append('files',f);    // this is main row
+    $f7.request({
+    url: 'http://localhost/cobaupload/kirim.php', 
+    method: 'POST', 
+    data: FData,
+    cache: false, 
+    dataType: 'application/json',
+    crossDomain: true, 
+    contentType: 'multipart/form-data',
+    processData: true, 
+    success: function (data){
+      console.log(data);
+      }
+    });
+
+    
+// $f7.request.post('http://localhost/cobaupload/kirim.php', { data: FData, async: false, cache: false, ContentType:'multipart/form-data', enctype: 'multipart/form-data', processData: false}, 
+// function (data) {
+//   console.log(data);
+// // $f7.dialog.close();
+// });
+
+// $f7.request.post("http://localhost/formlogin/aksi.php", {nama:nama, tanggal:tanggal, description:description}, function (data) {
+//      //And the response from api will come like this
+//      var data = JSON.parse(data); 
+//           if(data.status){
+//             $f7.dialog.alert("Success");
+//             clear();
+//             $update();
+//           }else{
+//             $f7.dialog.alert("Failed");
+//           }
+//       });
+
+    }
+
+
+
+
 
     const showNotificationFull = () => {
     $f7.dialog.preloader('Tunggu sebentar...');

@@ -49,7 +49,7 @@ var routes = [
       // alert(status);
       if (status=="login") {
         // redirect to such url
-        resolve('/dashboard/?user=' + to.query.user);
+        resolve('/dashboard/');
       }
       // // otherwise do nothing
       else { 
