@@ -1,5 +1,7 @@
 # My App
 
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+
 ## Framework7 CLI Options
 
 Framework7 app created with following options:
