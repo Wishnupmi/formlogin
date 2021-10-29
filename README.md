@@ -1,5 +1,7 @@
 # My App
 
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+
 ## Framework7 CLI Options
 
 Framework7 app created with following options:
@@ -144,3 +146,6 @@ Love Framework7? Support project by donating or pledging on:
 - Link Url : https://giflab.my.id/formlogin/
 - Username : wishnupmi@gmail.com
 - Password : 123
+
+## My Note
+* Copy folder cobaupload ke dalam webserver kita
