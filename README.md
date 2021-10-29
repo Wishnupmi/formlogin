@@ -142,6 +142,10 @@ Love Framework7? Support project by donating or pledging on:
 - Patreon: https://patreon.com/framework7
 - OpenCollective: https://opencollective.com/framework7
 
+## Fitur
+* Form Login
+* Input and Upload Image
+
 ## Link Demo App Mobile
 - Link Url : https://giflab.my.id/formlogin/
 - Username : wishnupmi@gmail.com
